@@ -25,6 +25,7 @@ public class SetMapperFactory {
             }
             catch (SQLException e) {
                 System.out.println(e.getMessage());
+
                 return null;
             }
             return ResEmp;
