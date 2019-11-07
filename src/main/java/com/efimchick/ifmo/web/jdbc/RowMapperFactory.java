@@ -12,6 +12,7 @@ import java.time.LocalDate;
 public class RowMapperFactory {
 
     public RowMapper<Employee> employeeRowMapper() {
+        
         return resultSet -> {
             try {
                 BigInteger id = new BigInteger(String.valueOf(resultSet.getInt("ID")));
