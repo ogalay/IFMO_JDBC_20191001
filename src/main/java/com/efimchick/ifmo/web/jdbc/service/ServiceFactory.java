@@ -164,13 +164,13 @@ public class ServiceFactory {
 
             @Override
             public List<Employee> getAllSortByLastname(Paging paging) {
-                ResultSet resultSet = getResultset("SELECT * FROM EMPLOYEE ORDER BY LASTNAME LIMIT ");
+                ResultSet resultSet = getResultset("SELECT * FROM EMPLOYEE ORDER BY LASTNAME");
                 return getPage(Objects.requireNonNull(employeeList2(resultSet)), paging);
             }
 
             @Override
             public List<Employee> getAllSortBySalary(Paging paging) {
-                ResultSet resultSet = getResultset("SELECT * FROM EMPLOYEE ORDER BY SALARY LIMIT ");
+                ResultSet resultSet = getResultset("SELECT * FROM EMPLOYEE ORDER BY SALARY");
                 return getPage(Objects.requireNonNull(employeeList2(resultSet)), paging);
             }
 
@@ -224,7 +224,10 @@ public class ServiceFactory {
 
             @Override
             public Employee getTopNthBySalaryByDepartment(int salaryRank, Department department) {
-                ResultSet resultSet = getResultset("SELECT * FROM EMPLOYEE WHERE DEPARTMENT =" + department.getId() + " ORDER BY SALARY DESC ");
+                ResultSet resultSet = getResultset("SELECT * FROM EMPLOYEE WHERE DEPARTMENT =" + department.getId() +
+                        " ORDER BY SALARY DESC " +
+                        " LIMIT " + 1 +
+                        " OFFSET " + (salaryRank - 1));
                 return Objects.requireNonNull(employeeList2(resultSet)).get(0);
             }
         };
